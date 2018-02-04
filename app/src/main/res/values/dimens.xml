@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Material design default dimensions -->
+    <dimen name="list_vertical_padding">8dp</dimen>
+
+    <!-- Placeholder -->
+    <dimen name="placeholder_image_size">160dp</dimen>
+
+</resources>

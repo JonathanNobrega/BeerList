@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Main UI colors -->
+    <color name="color_primary">#4A90E2</color>
+    <color name="color_primary_dark">#284F7C</color>
+    <color name="color_accent">#4A90E2</color>
+
+</resources>

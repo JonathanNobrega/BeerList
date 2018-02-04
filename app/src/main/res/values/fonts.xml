@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android system fonts mapping file for better readability.
+
+    Using a TextView, use the attribute 'android:fontFamily' referencing a string within this file.
+
+    You can also use fonts in combination with a text style with 'android:textStyle'. Available
+    options are normal, bold and italic, depending on font's availability, as shown below:
+
+    ######################################################################
+    #            Fonts             |  Italic |   Bold  | Italic and Bold #
+    ######################################################################
+    |        Roboto regular        |    X    |    X    |        X        #
+    |         Roboto-Light         |    X    |    X    |        X        #
+    |         Roboto-Thin          |    X    |    X    |        X        #
+    |       Roboto-Condensed       |    X    |    X    |        X        #
+    |         Roboto-Black         |    X    |    -    |        -        #
+    |        Roboto-Medium         |    X    |    X    |        X        #
+    ###################################################################### -->
+
+<resources>
+    <string name="roboto_regular">sans-serif</string>
+    <string name="roboto_light">sans-serif-light</string>
+    <string name="roboto_condensed">sans-serif-condensed</string>
+    <string name="roboto_black">sans-serif-black</string>
+    <!-- Available on Android 4.2+ -->
+    <string name="roboto_thin">sans-serif-thin</string>
+    <!-- Available on Android 5.0+ -->
+    <string name="roboto_medium">sans-serif-medium</string>
+</resources>
