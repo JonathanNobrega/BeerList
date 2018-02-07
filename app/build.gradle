@@ -1,15 +1,19 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+    buildToolsVersion globalConfiguration["androidBuildToolsVersion"]
 
     defaultConfig {
         applicationId "com.jonathannobrega.beerlist"
-        minSdkVersion 21
-        targetSdkVersion 27
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -24,19 +28,34 @@ android {
 }
 
 dependencies {
-    final SUPPORT_LIBRARY_VERSION = '27.0.2'
+    def compileDependencies = rootProject.ext.compileDependencies
+    def testDependencies = rootProject.ext.testDependencies
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$KOTLIN_VERSION"
-    implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
-    implementation "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
-    implementation "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation compileDependencies.kotlin
+    implementation compileDependencies.appCompatV7
+    implementation compileDependencies.androidAnnotations
+    implementation compileDependencies.androidSupportV4
+    implementation compileDependencies.supportRecyclerView
+    implementation compileDependencies.supportCardView
+    implementation compileDependencies.supportDesign
+    implementation compileDependencies.rxJava
+    implementation compileDependencies.rxAndroid
+    implementation compileDependencies.conductor
+    implementation compileDependencies.moshi
+    implementation compileDependencies.okHttp
+    implementation compileDependencies.retrofit
+    implementation compileDependencies.retrofitAdapter
+    implementation compileDependencies.retrofitConverter
+    implementation compileDependencies.javaxAnnotation
+    implementation compileDependencies.javaxInject
+    implementation compileDependencies.glide
+    implementation compileDependencies.constraintLayout
+    implementation compileDependencies.dagger
+    kapt compileDependencies.daggerCompiler
 
     // Test dependencies
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.13.0'
-
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    testImplementation testDependencies.junit
+    testImplementation testDependencies.kotlinJUnit
+    testImplementation testDependencies.mockito
+    testImplementation testDependencies.espressoCore
 }
