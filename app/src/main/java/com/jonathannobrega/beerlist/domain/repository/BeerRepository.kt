@@ -1,7 +1,6 @@
 package com.jonathannobrega.beerlist.domain.repository
 
 import com.jonathannobrega.beerlist.domain.model.Beer
-import io.reactivex.Completable
 import io.reactivex.Single
 
 /**
@@ -11,7 +10,7 @@ import io.reactivex.Single
  */
 interface BeerRepository {
 
-    fun getBeers(): Single<List<Beer>>
+    fun getBeers(page: Int, perPage: Int, searchQuery: String?): Single<List<Beer>>
 
 //    fun getFavoriteBeers(): Single<List<Beer>>
 //

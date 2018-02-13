@@ -1,12 +1,13 @@
 package com.jonathannobrega.beerlist.domain.model
 
 /**
- * Representation for a [Beer] fetched from an external layer data source
+ * Representation of a [Beer]
  */
 data class Beer(
-        val id: String,
+        val id: Long,
         val name: String,
-        val status: String,
+        val tagLine: String,
         val description: String,
-        val imageUrl: String
+        val imageUrl: String,
+        val isFavorite: Boolean
 )
