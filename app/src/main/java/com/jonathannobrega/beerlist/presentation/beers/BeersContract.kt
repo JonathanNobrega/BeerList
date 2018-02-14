@@ -1,7 +1,7 @@
 package com.jonathannobrega.beerlist.presentation.beers
 
 import com.jonathannobrega.beerlist.presentation.common.BasePresenter
-import com.jonathannobrega.beerlist.presentation.model.BeerViewModel
+import com.jonathannobrega.beerlist.presentation.model.PresentationBeer
 
 interface BeersContract {
 
@@ -11,7 +11,7 @@ interface BeersContract {
 
         fun hideProgress()
 
-        fun showBeers(beers: List<BeerViewModel>)
+        fun showBeers(beers: List<PresentationBeer>)
 
         fun hideBeers()
 
@@ -19,13 +19,13 @@ interface BeersContract {
 
         fun hideErrorState()
 
-        fun goToBeerDetailsScreen(beer: BeerViewModel)
+        fun goToBeerDetailsScreen(beer: PresentationBeer)
     }
 
     interface Presenter : BasePresenter<View> {
 
         fun retrieveBeers()
 
-        fun onBeerSelected(beer: BeerViewModel)
+        fun onBeerSelected(beer: PresentationBeer)
     }
 }

@@ -1,10 +1,10 @@
 package com.jonathannobrega.beerlist.presentation.beers
 
 import android.support.v7.util.DiffUtil
-import com.jonathannobrega.beerlist.presentation.model.BeerViewModel
+import com.jonathannobrega.beerlist.presentation.model.PresentationBeer
 
-class BeersDiffUtil(private val oldBeers: List<BeerViewModel>,
-                    private val newBeers: List<BeerViewModel>) : DiffUtil.Callback() {
+class BeersDiffUtil(private val oldBeers: List<PresentationBeer>,
+                    private val newBeers: List<PresentationBeer>) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {
         return oldBeers.size

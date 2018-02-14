@@ -10,15 +10,14 @@ import android.view.ViewGroup
 import com.bluelinelabs.conductor.RouterTransaction
 import com.bluelinelabs.conductor.changehandler.FadeChangeHandler
 import com.jonathannobrega.beerlist.R
-import com.jonathannobrega.beerlist.presentation.BeerListApplication
 import com.jonathannobrega.beerlist.presentation.beerdetails.BeerDetailsController
 import com.jonathannobrega.beerlist.presentation.common.BaseController
 import com.jonathannobrega.beerlist.presentation.extensions.getViewOrThrow
 import com.jonathannobrega.beerlist.presentation.extensions.hide
 import com.jonathannobrega.beerlist.presentation.extensions.inflate
 import com.jonathannobrega.beerlist.presentation.extensions.show
-import com.jonathannobrega.beerlist.presentation.injection.component.DaggerBeersComponent
-import com.jonathannobrega.beerlist.presentation.model.BeerViewModel
+import com.jonathannobrega.beerlist.presentation.injection.component.DaggerViewComponent
+import com.jonathannobrega.beerlist.presentation.model.PresentationBeer
 import kotlinx.android.synthetic.main.controller_beers.view.*
 import kotlinx.android.synthetic.main.generic_error_placeholder.view.*
 import javax.inject.Inject
@@ -66,7 +65,7 @@ class BeersController @Inject constructor() : BaseController(),
         getViewOrThrow().swipeRefresh.isRefreshing = false
     }
 
-    override fun showBeers(beers: List<BeerViewModel>) {
+    override fun showBeers(beers: List<PresentationBeer>) {
         getViewOrThrow().recyclerViewBeers.show()
         beersAdapter.refreshData(beers)
     }
@@ -83,7 +82,7 @@ class BeersController @Inject constructor() : BaseController(),
         getViewOrThrow().linearLayoutErrorPlaceholderContainer.hide()
     }
 
-    override fun goToBeerDetailsScreen(beer: BeerViewModel) {
+    override fun goToBeerDetailsScreen(beer: PresentationBeer) {
         router.pushController(
                 RouterTransaction.with(BeerDetailsController(beer.id))
                         .pushChangeHandler(FadeChangeHandler())
@@ -93,7 +92,7 @@ class BeersController @Inject constructor() : BaseController(),
 
     /********** BeersAdapter.ItemListener **********/
 
-    override fun onBeerClicked(beer: BeerViewModel) {
+    override fun onBeerClicked(beer: PresentationBeer) {
         presenter.onBeerSelected(beer)
     }
 
@@ -104,7 +103,6 @@ class BeersController @Inject constructor() : BaseController(),
     }
 
     private fun initializeSwipeRefresh(swipeRefresh: SwipeRefreshLayout) {
-//        swipeRefresh.disable()
         swipeRefresh.setColorSchemeResources(R.color.color_primary)
         swipeRefresh.setOnRefreshListener { presenter.retrieveBeers() }
     }

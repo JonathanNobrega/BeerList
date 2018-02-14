@@ -2,14 +2,14 @@ package com.jonathannobrega.beerlist.presentation.beers
 
 import com.jonathannobrega.beerlist.domain.interactor.beer.GetBeersUseCase
 import com.jonathannobrega.beerlist.domain.model.Beer
-import com.jonathannobrega.beerlist.presentation.mapper.BeerMapper
-import com.jonathannobrega.beerlist.presentation.model.BeerViewModel
+import com.jonathannobrega.beerlist.presentation.mapper.PresentationBeerMapper
+import com.jonathannobrega.beerlist.presentation.model.PresentationBeer
 import io.reactivex.observers.DisposableSingleObserver
 import javax.inject.Inject
 
 class BeersPresenter @Inject constructor(
         private val getBeersUseCase: GetBeersUseCase,
-        private val beerMapper: BeerMapper
+        private val beerMapper: PresentationBeerMapper
 ) : BeersContract.Presenter {
 
     private var view: BeersContract.View? = null
@@ -23,11 +23,12 @@ class BeersPresenter @Inject constructor(
 
     override fun retrieveBeers() {
         getViewOrThrow().showProgress()
-        getBeersUseCase.execute(GetBeersSubscriber())
+        // TODO: Implement real pagination
+        getBeersUseCase.execute(GetBeersSubscriber(), GetBeersUseCase.Params(1, 30))
     }
 
 
-    override fun onBeerSelected(beer: BeerViewModel) {
+    override fun onBeerSelected(beer: PresentationBeer) {
         getViewOrThrow().goToBeerDetailsScreen(beer)
     }
 
@@ -52,7 +53,7 @@ class BeersPresenter @Inject constructor(
     inner class GetBeersSubscriber : DisposableSingleObserver<List<Beer>>() {
 
         override fun onSuccess(beers: List<Beer>) {
-            val beersViewModel = beers.map { beerMapper.mapFromDomainToViewModel(it) }
+            val beersViewModel = beers.map { beerMapper.mapFromDomainToPresentation(it) }
             getViewOrThrow().hideProgress()
             getViewOrThrow().hideErrorState()
             getViewOrThrow().showBeers(beersViewModel)
