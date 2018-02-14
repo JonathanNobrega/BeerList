@@ -25,5 +25,5 @@ open class GetBeersUseCase @Inject constructor(
      * A [Params] class used to define parameters that can be supplied
      * for [GetBeersUseCase.execute].
      */
-    class Params(val page: Int, val perPage: Int = 30, val searchQuery: String?)
+    class Params(val page: Int, val perPage: Int = 30, val searchQuery: String? = null)
 }

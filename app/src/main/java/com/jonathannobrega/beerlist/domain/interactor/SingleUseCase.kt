@@ -36,7 +36,7 @@ abstract class SingleUseCase<T, in Params> constructor(
      * Disposes from current [CompositeDisposable].
      */
     fun dispose() {
-        if (!disposables.isDisposed) disposables.dispose()
+        if (!disposables.isDisposed) disposables.clear()
     }
 
     /**
