@@ -1,6 +1,7 @@
 package com.jonathannobrega.beerlist.domain.repository
 
 import com.jonathannobrega.beerlist.domain.model.Beer
+import io.reactivex.Completable
 import io.reactivex.Single
 
 /**
@@ -10,9 +11,24 @@ import io.reactivex.Single
  */
 interface BeerRepository {
 
+    /**
+     * Returns a list of [Beer]s.
+     *
+     * @param page Current pagination's page number
+     * @param perPage Amount of results with each page
+     * @param searchQuery A string used to filter results based on a [Beer]'s name
+     */
     fun getBeers(page: Int, perPage: Int, searchQuery: String?): Single<List<Beer>>
 
-//    fun getFavoriteBeers(): Single<List<Beer>>
-//
-//    fun setBeerAsFavorite(beer: Beer): Completable
+    /**
+     * Returns a [Beer] with the specified id.
+     *
+     * @param beerId A unique [Beer] identifier
+     */
+    fun getBeerById(beerId: Long): Single<Beer>
+
+    /**
+     * Saves a given list of [Beer]s.
+     */
+    fun saveBeers(beers: List<Beer>): Completable
 }
