@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.jonathannobrega.beerlist.R
 import com.jonathannobrega.beerlist.presentation.extensions.inflate
 import com.jonathannobrega.beerlist.presentation.model.PresentationBeer
@@ -29,10 +29,7 @@ class BeersAdapter(
 
         Glide.with(holder.view.context)
                 .load(beer.imageUrl)
-                .apply(
-                        RequestOptions.circleCropTransform()
-                                .placeholder(R.color.placeholder_color)
-                )
+                .transition(withCrossFade())
                 .into(holder.view.imageViewBeerImage)
     }
 
