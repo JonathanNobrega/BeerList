@@ -1,12 +1,13 @@
 package com.jonathannobrega.beerlist.presentation.model
 
 /**
- * Representation for a [BeerViewModel] fetched from an external layer data source
+ * Representation of a Beer used on presentation layer.
  */
-data class BeerViewModel( // PresentationBeer
-        val id: String,
+data class PresentationBeer(
+        val id: Long,
         val name: String,
-        val status: String,
+        val tagLine: String,
         val description: String,
-        val imageUrl: String
+        val imageUrl: String,
+        val isFavorite: Boolean
 )

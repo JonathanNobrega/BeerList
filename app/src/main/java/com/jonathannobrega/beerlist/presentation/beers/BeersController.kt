@@ -16,7 +16,7 @@ import com.jonathannobrega.beerlist.presentation.extensions.getViewOrThrow
 import com.jonathannobrega.beerlist.presentation.extensions.hide
 import com.jonathannobrega.beerlist.presentation.extensions.inflate
 import com.jonathannobrega.beerlist.presentation.extensions.show
-import com.jonathannobrega.beerlist.presentation.injection.component.DaggerViewComponent
+import com.jonathannobrega.beerlist.presentation.injection.component.DaggerBeersComponent
 import com.jonathannobrega.beerlist.presentation.model.PresentationBeer
 import kotlinx.android.synthetic.main.controller_beers.view.*
 import kotlinx.android.synthetic.main.generic_error_placeholder.view.*
@@ -30,11 +30,7 @@ class BeersController @Inject constructor() : BaseController(),
     lateinit var beersAdapter: BeersAdapter
 
     override fun onContextAvailable(context: Context) {
-        // TODO: Fix this crap
-        DaggerBeersComponent.builder()
-                .applicationModule(BeerListApplication.applicationModule)
-                .build()
-                .inject(this)
+        DaggerBeersComponent.builder().build().inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View {

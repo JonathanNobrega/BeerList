@@ -23,10 +23,9 @@ class BeersPresenter @Inject constructor(
 
     override fun retrieveBeers() {
         getViewOrThrow().showProgress()
-        // TODO: Implement real pagination
+        // TODO: Finish pagination implementation
         getBeersUseCase.execute(GetBeersSubscriber(), GetBeersUseCase.Params(1, 30))
     }
-
 
     override fun onBeerSelected(beer: PresentationBeer) {
         getViewOrThrow().goToBeerDetailsScreen(beer)
@@ -39,6 +38,7 @@ class BeersPresenter @Inject constructor(
 
     /********** Methods **********/
 
+    // TODO: Move to a BasePresenter
     private fun getViewOrThrow(): BeersContract.View {
         val view = view
         if (view == null) {

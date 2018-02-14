@@ -4,12 +4,27 @@ import com.jonathannobrega.beerlist.domain.model.Beer
 import com.jonathannobrega.beerlist.presentation.model.PresentationBeer
 import javax.inject.Inject
 
-open class BeerMapper @Inject constructor() : Mapper<PresentationBeer, Beer> {
+/**
+ * Maps a [PresentationBeer] to and from a [Beer] when data is moving between presentation layer
+ * and domain layer.
+ */
+class PresentationBeerMapper @Inject constructor() {
 
     /**
-     * Maps a [Beer] to a [PresentationBeer] when data is moving between this layer and the Domain layer
+     * Maps an instance of a [Beer] from domain layer to a [PresentationBeer] from presentation
+     * layer.
      */
-    override fun mapFromDomainToViewModel(type: Beer): PresentationBeer {
-        return PresentationBeer(type.id, type.name, type.status, type.description, type.imageUrl)
+    fun mapFromDomainToPresentation(beer: Beer): PresentationBeer {
+        return PresentationBeer(beer.id, beer.name, beer.tagLine, beer.description, beer.imageUrl,
+                beer.isFavorite)
+    }
+
+    /**
+     * Maps an instance of a [PresentationBeer] from presentation layer to a [Beer] from domain
+     * layer.
+     */
+    fun mapFromPresentationToDomain(presentationBeer: PresentationBeer): Beer {
+        return Beer(presentationBeer.id, presentationBeer.name, presentationBeer.tagLine,
+                presentationBeer.description, presentationBeer.imageUrl, presentationBeer.isFavorite)
     }
 }
