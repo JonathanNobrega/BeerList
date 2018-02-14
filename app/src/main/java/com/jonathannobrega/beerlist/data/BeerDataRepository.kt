@@ -16,13 +16,13 @@ class BeerDataRepository @Inject constructor(
 ) : BeerRepository {
 
     override fun getBeers(page: Int, perPage: Int, searchQuery: String?): Single<List<Beer>> {
-        return if (beerLocal.isCached((page * perPage) + perPage)) {
+        return if (beerLocal.isCached(page * perPage)) {
             beerLocal.getBeers(page, perPage, searchQuery)
                     .map { beerMapper.mapFromDataToDomain(it) }
         } else {
             beerRemote.getBeers(page, perPage, searchQuery)
                     .map { beerMapper.mapFromDataToDomain(it) }
-                    .doOnSuccess { saveBeers(it) }
+                    .flatMap { saveBeers(it).toSingle { it } }
         }
     }
 
