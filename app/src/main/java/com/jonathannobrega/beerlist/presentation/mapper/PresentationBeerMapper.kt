@@ -8,7 +8,7 @@ import javax.inject.Inject
  * Maps a [PresentationBeer] to and from a [Beer] when data is moving between presentation layer
  * and domain layer.
  */
-class PresentationBeerMapper @Inject constructor() {
+open class PresentationBeerMapper @Inject constructor() {
 
     /**
      * Maps an instance of a [Beer] from domain layer to a [PresentationBeer] from presentation
