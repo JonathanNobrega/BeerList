@@ -1,18 +1,26 @@
 package com.jonathannobrega.beerlist.presentation
 
 import android.app.Application
-
-import com.jonathannobrega.beerlist.presentation.injection.module.ApplicationModule
+import com.jonathannobrega.beerlist.presentation.injection.component.ApplicationComponent
+import com.jonathannobrega.beerlist.presentation.injection.component.DaggerApplicationComponent
+import io.realm.Realm
 
 class BeerListApplication : Application() {
 
+    private lateinit var appComponent: ApplicationComponent
+
     override fun onCreate() {
         super.onCreate()
-        applicationModule = ApplicationModule(this)
+        Realm.init(this)
+        initializeInjector()
     }
 
-    // TODO: Fix this crap
-    companion object {
-        lateinit var applicationModule: ApplicationModule
+    private fun initializeInjector() {
+        appComponent = DaggerApplicationComponent.builder().build()
+        appComponent.inject(this)
+    }
+
+    fun getAppComponent(): ApplicationComponent {
+        return appComponent
     }
 }
